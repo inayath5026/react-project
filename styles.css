@@ -46,7 +46,6 @@ body {
     color: orange; 
 }
 
-
 /* Body container */
 .Body {
     display: flex;
@@ -90,15 +89,17 @@ body {
 }
 
 .search button:hover {
-    background-color: orange; 
+    background-color: darkorange; 
 }
 
 /* Card container */
 .card-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-    justify-content: center;
+    flex-wrap: wrap; /* Allow cards to wrap into multiple rows */
+    justify-content: space-between; /* Space out cards evenly */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    max-width: 100%;
 }
 
 /* Card styles */
@@ -106,7 +107,8 @@ body {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: 160px;
+    width: 160px; 
+    height: 260px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     overflow: hidden;
@@ -120,13 +122,20 @@ body {
 
 .card img {
     width: 100%;
-    height: 140px; 
+    height: 150px; /* Adjust height to fit card size */
     object-fit: cover; 
     border-bottom: 1px solid #ddd;
 }
 
-.card h4 {
-    margin: 6px 0;
-    font-size: 14px;
+.card h2 {
+    margin: 10px 0;
+    font-size: 10px;
     color: #333; 
+    font-weight: 600;
+}
+
+.card p {
+    margin: 4px 0;
+    font-size: 8px;
+    color: #493f3f; 
 }
