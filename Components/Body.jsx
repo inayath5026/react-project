@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
-import Search from "./Search";
 
 export default Body = () => {
   const [resList, setResList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [inputText, setInputText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -20,25 +21,52 @@ export default Body = () => {
         jsonData.data.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards ||
         [];
       setResList(restaurantCards);
+      setFilteredList(restaurantCards);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  if(resList.length === 0){
-    return <Shimmer/>
-  }
+  const topRated = () => {
+    setFilteredList(
+      filteredList.filter((restaurant) => {
+        const restaurantInfo = restaurant.card.card.info;
+        return restaurantInfo.avgRating > 4.5;
+      })
+    );
+  };
+
+  const handleSearch = () => {
+    const fL = resList.filter((res) =>
+      res.card.card.info.name.toLowerCase().includes(inputText.toLowerCase())
+    );
+    setFilteredList(fL);
+  };
+
+  const handleInputText = (e) => {
+    setInputText(e.target.value);
+  };
 
   return (
-    <>
-      <div className="Body">
-        <Search/>
-        <div className="card-container">
-          {resList.map((restaurant) => (
-            <Card resData={restaurant} />
-          ))}
-        </div>
+    <div className="Body">
+      <div className="search">
+        <input type="text" value={inputText} onChange={handleInputText} />
+        <button onClick={handleSearch}>Search</button>
       </div>
-    </>
+
+      <button onClick={topRated} className="top-rated">
+        Top Rated
+      </button>
+
+      <div className="card-container">
+        {resList.length === 0 ? (
+          <Shimmer />
+        ) : (
+          filteredList.map((restaurant) => (
+            <Card key={restaurant.card.card.info.id} resData={restaurant} />
+          ))
+        )}
+      </div>
+    </div>
   );
 };
