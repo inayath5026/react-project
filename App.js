@@ -3,19 +3,42 @@ import ReactDOM from "react-dom/client";
 import Header from "./Components/Header.jsx";
 import Body from "./Components/Body.jsx";
 import About from "./Components/About.jsx";
-
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import Error from "./Components/Error.jsx";
+import Contact from "./Components/Contact.jsx";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 
 let App = () => {
   return (
     <>
       <Header />
-      <Body />
+      <Outlet />
     </>
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact/>,
+      }
+    ],
+    errorElement: <Error/>
+  }
+]);
 
-root.render(<App/>);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<RouterProvider router={appRouter}/>);
