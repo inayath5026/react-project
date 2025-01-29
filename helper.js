@@ -33,4 +33,12 @@ const fetchData = async (setResList, setFilteredList) => {
   }
 };
 
-export { topRated, handleSearch, fetchData };
+const sortPrices = (resList, setFilteredList) => {
+    const sortedList = [...resList].sort((a, b) => {
+      return a.card.card.info.costForTwo - b.card.card.info.costForTwo;
+    });
+    setFilteredList(sortedList);
+};
+
+
+export { topRated, handleSearch, fetchData, sortPrices };

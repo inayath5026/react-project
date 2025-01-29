@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
-import { handleSearch, topRated, fetchData } from "../helper";
+import { handleSearch, topRated, fetchData, sortPrices } from "../helper";
 
 export default Body = () => {
   const [resList, setResList] = useState([]);
@@ -25,17 +25,24 @@ export default Body = () => {
           onClick={() => {
             handleSearch(resList, setFilteredList, inputText);
           }}
+          className="search-btn"
         >
           Search
         </button>
-      </div>
+        <button
+          onClick={() => topRated(filteredList, setFilteredList)}
+          className="top-rated"
+        >
+          Top Rated
+        </button>
 
-      <button
-        onClick={() => topRated(filteredList, setFilteredList)}
-        className="top-rated"
-      >
-        Top Rated
-      </button>
+        <button
+          onClick={() => sortPrices(resList, setFilteredList)}
+          className="sort-prices"
+        >
+          Sort Prices
+        </button>
+      </div>
 
       <div className="card-container">
         {resList.length === 0 ? (
