@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { handleSearch, topRated, fetchData, sortPrices } from "../helper";
+import { Link } from "react-router-dom";
 
 export default Body = () => {
   const [resList, setResList] = useState([]);
@@ -49,7 +50,7 @@ export default Body = () => {
           <Shimmer />
         ) : (
           filteredList.map((restaurant) => (
-            <Card key={restaurant.card.card.info.id} resData={restaurant} />
+            <Link to={"/res/"+restaurant.card.card.info.id} key={restaurant.card.card.info.id} className="card-link"><Card resData={restaurant} /></Link>
           ))
         )}
       </div>

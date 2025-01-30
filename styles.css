@@ -140,6 +140,11 @@ body {
     font-size: 8px;
     color: #493f3f; 
 }
+
+.card-link {
+    text-decoration: none;
+}
+
 /*Error Component Styles */
 .error-container {
     display: flex;

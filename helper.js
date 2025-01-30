@@ -34,11 +34,23 @@ const fetchData = async (setResList, setFilteredList) => {
 };
 
 const sortPrices = (resList, setFilteredList) => {
-    const sortedList = [...resList].sort((a, b) => {
-      return a.card.card.info.costForTwo - b.card.card.info.costForTwo;
-    });
-    setFilteredList(sortedList);
+  const sortedList = [...resList].sort((a, b) => {
+    return a.card.card.info.costForTwo - b.card.card.info.costForTwo;
+  });
+  setFilteredList(sortedList);
 };
 
+// Fetching Menu Data from API
+const fetchMenu = async ( setResMenu, id) => {
+  try {
+    const apiData = await fetch(
+      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.406498&lng=78.47724389999999&restaurantId="+"37343"
+    );
+    const json = await apiData.json();
+    setResMenu(json.data);
+  } catch (error) {
+    console.error("Error fetching restaurant menu:", error);
+  }
+};
 
-export { topRated, handleSearch, fetchData, sortPrices };
+export { topRated, handleSearch, fetchData, sortPrices, fetchMenu };

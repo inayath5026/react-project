@@ -5,6 +5,7 @@ import Body from "./Components/Body.jsx";
 import About from "./Components/About.jsx";
 import Error from "./Components/Error.jsx";
 import Contact from "./Components/Contact.jsx";
+import Restaurant from "./Components/Restaurant.jsx";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 
@@ -33,11 +34,19 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact/>,
+      },
+      {
+        path: "/res/:id",
+        element: <Restaurant/>,
       }
     ],
     errorElement: <Error/>
   }
-]);
+],
+{
+  future: { v7_relativeSplatPath: true },
+}
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
